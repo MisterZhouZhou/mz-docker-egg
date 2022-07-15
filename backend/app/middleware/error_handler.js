@@ -1,9 +1,9 @@
 /*
  * @Author: misterzhou
  * @Date: 2022-07-13 14:42:38
- * @LastEditTime: 2022-07-13 14:47:21
+ * @LastEditTime: 2022-07-14 18:11:28
  * @LastEditors: misterzhou
- * @FilePath: /mz-egg/backend/app/middleware/error_handle.js
+ * @FilePath: /mz-docker-egg/backend/app/middleware/error_handler.js
  * @Description: 异常拦截
  */
 'use strict';
@@ -21,7 +21,7 @@ module.exports = (option, app) => {
         code: status,
         // 服务端自身的处理逻辑错误(包含框架错误500 及 自定义业务逻辑 错误533开始 )
         // 客户端请求参数导致的错误(4xx开始)，设置不同的状态码
-        error,
+        msg: error,
       };
       if (status === 422) {
         ctx.body.detail = err.errors;
