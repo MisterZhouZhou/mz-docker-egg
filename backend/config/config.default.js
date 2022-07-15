@@ -16,9 +16,34 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1657620434362_4042';
 
   // add your middleware config here
-  config.middleware = [ 'errorHandler' ];
+  config.middleware = [ 'errorHandler', 'tokenHandler' ];
 
-  // egg-swagger-doc 配置信息。
+  // 跨域
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  };
+
+  // jwt
+  config.jwt = {
+    secret: 'Great4-M',
+    enable: true,
+    match: '/^\/api/',
+  };
+  // 中间件匹配开启
+  config.tokenHandler = {
+    match(ctx) {
+      const url = ctx.request.url;
+      console.log('-------url--', url);
+      if (url.indexOf('/api')) {
+        return false;
+      }
+      // tokenHandler 执行条件，匹配失败进入
+      return true;
+    },
+  };
+
+  // egg-swagger-doc 配置信息
   config.swaggerdoc = {
     dirScanner: './app/controller', // 配置自动扫描的控制器路径。
     // 接口文档的标题，描述或其它。

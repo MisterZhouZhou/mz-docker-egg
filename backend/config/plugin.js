@@ -16,8 +16,24 @@ module.exports = {
     enable: true, // 是否启用。
     package: 'egg-swagger-doc', // 指定包名称。
   },
+  // 请求数据验证
   validate: {
     enable: true,
     package: 'egg-validate',
+  },
+  // 数据加密
+  bcrypt: {
+    enable: true,
+    package: 'egg-bcrypt',
+  },
+  // jwt鉴权
+  jwt: {
+    enable: true,
+    package: 'egg-jwt',
+  },
+  // 跨域
+  cors: {
+    enable: true,
+    package: 'egg-cors',
   },
 };

@@ -1,9 +1,9 @@
 /*
  * @Author: misterzhou
  * @Date: 2022-07-13 10:33:08
- * @LastEditTime: 2022-07-13 13:05:48
+ * @LastEditTime: 2022-07-14 10:41:46
  * @LastEditors: misterzhou
- * @FilePath: /mz-egg/backend/app/service/book.js
+ * @FilePath: /mz-docker-egg/backend/app/service/book.js
  * @Description: book service
  */
 const { Service } = require('egg');
@@ -19,13 +19,11 @@ class BookSerVice extends Service {
     return await this.database.findAll();
   }
 
-  /**
-	 * 根据Id获取表信息
-	 * @param {*} id
-	 */
+  // 根据Id获取表信息
   async selectById(id) {
-    const result = await this.database.findByPk(id); // sequelize 内置查询方法。
-    return result;
+    const book = await this.database.findByPk(id);
+    console.log('========', id, '-----', typeof id, '----', book, '---', book[0]);
+    return book;
   }
 }
 

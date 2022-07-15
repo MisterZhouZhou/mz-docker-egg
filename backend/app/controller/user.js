@@ -5,15 +5,15 @@ const { Controller } = require('egg');
  * @controller 用户模块 用户相关Api
  */
 class UserController extends Controller {
-  async index() {
-    const { ctx } = this;
-    ctx.body = 'user';
-  }
+  // async index() {
+  //   const { ctx } = this;
+  //   ctx.body = 'user';
+  // }
 
   /**
 	 * @summary 获取用户记录
 	 * @description 获取用户记录
-	 * @router get /user/list
+	 * @router get /api/user/list
 	 * @response 200 baseResponse 用户记录
 	 */
   async list() {
@@ -22,15 +22,24 @@ class UserController extends Controller {
     ctx.helper.success({ ctx, res });
   }
 
-  async hello() {
+  /**
+	 * @summary 获取用户信息
+	 * @description 获取用户信息
+	 * @router get /api/user/{id}
+	 * @request path integer id 用户id
+	 * @response 200 baseResponse 用户信息
+	 */
+  async searchById() {
     const { ctx } = this;
-    ctx.body = 'user hello';
+    const { id } = ctx.params;
+    const res = await ctx.service.user.getById(id);
+    ctx.helper.success({ ctx, res });
   }
 
   /**
 	 * @summary 创建用户
 	 * @description 创建用户
-	 * @router post /user/create
+	 * @router post /api/user/create
 	 * @request body createRequest *body (DTO)
 	 * @response 200 baseResponse 用户信息 (DTO)
 	 */
@@ -49,7 +58,7 @@ class UserController extends Controller {
   /**
 	 * @summary 根据用户id删除用户
 	 * @description 根据用户id删除用户
-	 * @router post /user/delete
+	 * @router post /api/user/delete
 	 * @request body deleteRequest *body (DTO)
 	 * @response 200 baseResponse 删除成功
 	 */
